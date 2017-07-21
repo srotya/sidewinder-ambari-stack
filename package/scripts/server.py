@@ -2,7 +2,21 @@
 Sidewinder server file
 """
 
+import collections
+import os
+
+from resource_management.libraries.functions.version import format_stack_version
+from resource_management.libraries.resources.properties_file import PropertiesFile
+from resource_management.libraries.resources.template_config import TemplateConfig
+from resource_management.core.resources.system import Directory, Execute, File, Link
+from resource_management.core.source import StaticFile, Template, InlineTemplate
+from resource_management.libraries.functions import format
+from resource_management.libraries.functions.stack_features import check_stack_feature
+from resource_management.libraries.functions import StackFeature
+from resource_management.libraries.functions import Direction
+
 from resource_management import *
+from resource_management.core.logger import Logger
 import signal
 import sys
 import os
@@ -16,7 +30,8 @@ class Sidewinder(Script):
         import params
         env.set_params(params)
         print 'Install the Sidewinder'
-        stop_cmd = format("wget -O /tmp/sidewinder.rpm http://search.maven.org/remotecontent?filepath=com/srotya/sidewinder/sidewinder-core/0.0.22/sidewinder-core-0.0.22.rpm; rpm -ivf /tmp/sidewinder.rpm")
+#        stop_cmd = format("wget -O /tmp/sidewinder.rpm http://search.maven.org/remotecontent?filepath=com/srotya/sidewinder/sidewinder-core/0.0.22/sidewinder-core-0.0.22.rpm; rpm -ivf /tmp/sidewinder.rpm")
+        stop_cmd = format("rpm -ivf /tmp/sidewinder.rpm")
         Execute(stop_cmd)
         self.install_packages(env)
     def configure(self, env):

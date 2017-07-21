@@ -3,9 +3,18 @@
 Sidewinder Params configurations
 """
 
-from resource_management.libraries.functions.version import format_hdp_stack_version, compare_versions
-from resource_management import *
-import status_params
+import os
+from resource_management.libraries.functions import format
+from resource_management.libraries.script.script import Script
+from resource_management.libraries.functions.version import format_stack_version
+from resource_management.libraries.functions import StackFeature
+from resource_management.libraries.functions.stack_features import check_stack_feature
+from resource_management.libraries.functions.stack_features import get_stack_feature_version
+from resource_management.libraries.functions.default import default
+from resource_management.libraries.functions.get_stack_version import get_stack_version
+from resource_management.libraries.functions.is_empty import is_empty
+from resource_management.libraries.functions import stack_select
+from resource_management.libraries.functions import conf_select
 
 # server configurations
 config = Script.get_config()
@@ -22,6 +31,9 @@ log_dir = config['configurations']['sidewinder-env']['log_dir']
 hostname = config['hostname']
 java64_home = config['hostLevelParams']['java_home']
 sidewinder_env_sh_template = config['configurations']['sidewinder-env']['content']
+
+# YAML properties
+http_port = config['configurations']['sidewinder-yaml']['http_port']
 
 # Basic properties
 data_dir = config['configurations']['sidewinder-props']['data.dir']

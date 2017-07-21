@@ -18,9 +18,9 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
   <property require-input="false">
-    <name>port_number</name>
+    <name>http_port</name>
     <display-name>HTTP Port</display-name>
-    <value>8080</value>
+    <value>8089</value>
     <description>Port number for HTTP REST API</description>
   </property>
 </configuration>
